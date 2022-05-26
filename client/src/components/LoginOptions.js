@@ -1,18 +1,12 @@
 import {
     Flex,
     Box,
-    Checkbox,
     Stack,
-    Link,
     Button,
     Heading,
     Text,
     useColorModeValue,
   } from '@chakra-ui/react';
-
-  import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-  import { solid, regular, brands } from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
-  
   
   export default function SimpleCard() {
     return (
@@ -39,7 +33,7 @@ import {
                     bg: 'blue.500',
                   }}>
                   <Stack direction={'row'} spacing = {4}>
-                    <FontAwesomeIcon icon={brands('facebook')}/>
+                    <i class='fab fa-facebook-f'></i>
                     <Text>Log in with Facebook</Text>
                   </Stack>
                 </Button>
@@ -51,14 +45,14 @@ import {
                     bg: 'gray.100',
                   }}>
                   <Stack direction={'row'} spacing = {4}>
-                    <FontAwesomeIcon icon={brands('google')}/>
+                  <i class='fab fa-google'></i>
                     <Text>Log in with Google</Text>
                   </Stack>
                 </Button>
                 
                 <Button
                   bg={'red.400'}
-                  color={'black'}
+                  color={'white'}
                   _hover={{
                     bg: 'red.300',
                   }}>
@@ -86,7 +80,7 @@ import {
 
                 <Button
                  bg={'red.400'}
-                 color={'black'}
+                 color={'white'}
                  _hover={{
                    bg: 'red.300',
                  }}>
