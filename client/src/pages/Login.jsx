@@ -9,7 +9,7 @@ import {
 
   import LoginOptions from '../components/LoginOptions';
 
-  export default function CallToActionWithVideo() {
+  function Login() {
     return (
       <Container maxW={'7xl'}>
         <Stack
@@ -63,4 +63,4 @@ import {
     );
   }
   
-  
+  export default Login

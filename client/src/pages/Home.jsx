@@ -4,7 +4,7 @@ import {
   Wrap,
   Container,
 } from '@chakra-ui/react';
-import Card from '../components/card/Card';
+import Card from '../components/homeCards/Card';
 
 const mockCardData = [
     {
@@ -27,7 +27,7 @@ const mockCardData = [
     }
   ]
 
-const Home = () => {
+function Home() {
   return (
     <Container maxW={'7xl'} p="12">
       <Divider marginTop="2" />
