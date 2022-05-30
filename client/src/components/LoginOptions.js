@@ -6,12 +6,25 @@ import {
     Heading,
     Text,
     useColorModeValue,
+    Divider,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton, 
+    useDisclosure
   } from '@chakra-ui/react';
+
+  import LoginForm from './LoginForm';
+  import SignupForm from './SignUpForm';
   
   export default function SimpleCard() {
+    const signupModal = useDisclosure();
+    const loginModal = useDisclosure()
     return (
       <Flex
-        minH={'100vh'}
         align={'center'}
         justify={'center'}
         bg={useColorModeValue('gray.50', 'gray.800')}>
@@ -25,57 +38,41 @@ import {
             boxShadow={'lg'}
             p={8}>
             <Stack spacing={4}>
-
-                <Button
-                  bg={'blue.400'}
-                  color={'white'}
-                  _hover={{
-                    bg: 'blue.500',
-                  }}>
-                  <Stack direction={'row'} spacing = {4}>
-                    <i class='fab fa-facebook-f'></i>
-                    <Text>Log in with Facebook</Text>
-                  </Stack>
-                </Button>
-                
-                <Button
-                  bg={'white'}
-                  color={'black'}
-                  _hover={{
-                    bg: 'gray.100',
-                  }}>
-                  <Stack direction={'row'} spacing = {4}>
-                  <i class='fab fa-google'></i>
-                    <Text>Log in with Google</Text>
-                  </Stack>
-                </Button>
                 
                 <Button
                   bg={'red.400'}
                   color={'white'}
                   _hover={{
                     bg: 'red.300',
-                  }}>
-                  <Stack direction={'row'} spacing = {4}>
-                    <Text>Sign up with your email</Text>
-                  </Stack>
+                  }}
+                  onClick={signupModal.onOpen}
+                  >
+                   Sign up with your email
                 </Button>
+                
+                {/* sign up form */}
+                <Modal isOpen={signupModal.isOpen} onClose={signupModal.onClose}>
+                  <ModalOverlay />
+                  <ModalContent>
+                    <ModalCloseButton />
+                    <ModalBody>
+                      <SignupForm/>
+                    </ModalBody>
+
+                    <ModalFooter>
+                      <Button colorScheme='red' mr={3} onClick={signupModal.onClose}>
+                        Close
+                      </Button>
+                    </ModalFooter>
+                  </ModalContent>
+                </Modal>
 
               <Stack 
               spacing={7}
               position={'relative'}
               py = {4} 
-              _after={{
-                content: "''",
-                width: 'full',
-                height: '2%',
-                position: 'absolute',
-                bottom: 120,
-                left: 0,
-                bg: 'gray.200',
-                zIndex: 1,
-              }}>
-
+              >
+                <Divider/>
                 <Text>Already has an account?</Text>
 
                 <Button
@@ -83,9 +80,30 @@ import {
                  color={'white'}
                  _hover={{
                    bg: 'red.300',
-                 }}>
+                 }}
+                 onClick={loginModal.onOpen}
+                 >
                   Login
                 </Button>
+
+                
+
+                {/* log in form */}
+                <Modal  isOpen={loginModal.isOpen} onClose={loginModal.onClose}>
+                  <ModalOverlay />
+                  <ModalContent>
+                    <ModalCloseButton />
+                    <ModalBody>
+                      <LoginForm/>
+                    </ModalBody>
+
+                    <ModalFooter>
+                      <Button colorScheme='red' mr={3} onClick={loginModal.onClose}>
+                        Close
+                      </Button>
+                    </ModalFooter>
+                  </ModalContent>
+                </Modal>
               </Stack>
             </Stack>
           </Box>

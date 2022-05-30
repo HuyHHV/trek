@@ -3,8 +3,6 @@ import {
     Stack,
     Flex,
     Box,
-    Heading,
-    Text
   } from '@chakra-ui/react';
 
   import StatsCard from '../components/profile/StatsCard';

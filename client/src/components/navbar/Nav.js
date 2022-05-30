@@ -9,22 +9,21 @@ import {
   MenuList,
   MenuItem,
   MenuDivider,
-  useDisclosure,
   useColorModeValue,
   Stack,
   useColorMode,
   Center,
 } from '@chakra-ui/react';
 import NavLink from './NavLink';
+import Auth from '../../utils/auth';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faHouse, faUser, faRankingStar} from '@fortawesome/free-solid-svg-icons';
 
-
 const navlinks = [
   {
     icon: <FontAwesomeIcon icon={faHouse} />,
-    link: '/home'
+    link: '/'
   },
   {
     icon: <FontAwesomeIcon icon={faUser} />,
@@ -40,6 +39,10 @@ const navlinks = [
 export default function Nav() {
   const { colorMode, toggleColorMode } = useColorMode();
   // const { isOpen, onOpen, onClose } = useDisclosure();
+  const logout = (event) => {
+    event.preventDefault();
+    Auth.logout();
+  };
   return (
     <>
       <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
@@ -88,8 +91,12 @@ export default function Nav() {
                     {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
                     </Button>
                   </MenuItem>
-                  <MenuItem>Account Settings</MenuItem>
-                  <MenuItem>Logout</MenuItem>
+            
+                  <MenuItem>
+                    <Button onClick={logout}>
+                      Logout
+                    </Button>
+                  </MenuItem>
                 </MenuList>
               </Menu>
             </Stack>

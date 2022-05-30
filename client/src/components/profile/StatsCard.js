@@ -2,16 +2,13 @@ import {
   Heading,
   Avatar,
   Box,
-  Center,
   Progress ,
   Image,
   Flex,
   Text,
   Stack,
-  Button,
   useColorModeValue,
   HStack,
-  VStack
 } from '@chakra-ui/react';
 
 export default function StatsCard() {

@@ -5,10 +5,7 @@ import {
     Link,
     Image,
     Text,
-    HStack,
-    Tag,
-    WrapItem,
-    SpaceProps,
+    WrapItem
   } from '@chakra-ui/react';
 import BlogTags from './BlogTags'
 
