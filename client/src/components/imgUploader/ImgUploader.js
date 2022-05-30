@@ -1,11 +1,12 @@
 import React,  {  useState } from 'react'
-import { Center,
+import { 
     Text,
     FormControl,
     FormLabel,
     Input,
     VStack,
-    Image
+    Image,
+    Button
  } from '@chakra-ui/react';
 import Dropzone  from './Dropzone';
 
@@ -16,9 +17,11 @@ import imgurAPI from '../../utils/imurAPI';
 function ImgUploader({ onFileAccepted }) {
     // on drop image
     const [dropState, setDropState] = useState(false);
-    const [file, setFile] = useState()
+    const [file, setFile] = useState();
+    const [uploadImg, setImg] = useState();
     const importFile = (img) => {
       console.log(img);
+      setImg(img);
       Object.assign(img, {
         url: URL.createObjectURL(img)
       });
@@ -46,12 +49,18 @@ function ImgUploader({ onFileAccepted }) {
       // submit form
       const handleFormSubmit = async (event) => {
         event.preventDefault();
+        const URL = await imgurAPI(file);
+        console.log(URL)
+        setFormState({
+          URL: URL
+        });     
         console.log(formState);
-    
+        
         try {
           const { data } = await addLocation({
             variables: { ...formState },
           });
+
     
         } catch (e) {
           console.error(e);
@@ -59,7 +68,7 @@ function ImgUploader({ onFileAccepted }) {
       };
 
   return (
-    <form>
+    <form onSubmit={handleFormSubmit}>
         <VStack space={4}>
           <Text>Enter location infor and upload your image in the box below</Text>
           <FormControl>
@@ -76,7 +85,7 @@ function ImgUploader({ onFileAccepted }) {
               <Input
               type="text"
               name='street'
-              value={formState.name}
+              value={formState.street}
               onChange={handleChange}
               />
           </FormControl>
@@ -85,7 +94,7 @@ function ImgUploader({ onFileAccepted }) {
               <Input
               type="text"
               name='suburb'
-              value={formState.name}
+              value={formState.suburb}
               onChange={handleChange}
               />
           </FormControl>
@@ -93,6 +102,9 @@ function ImgUploader({ onFileAccepted }) {
           (<Image src={file.url}/>) 
           :(<Dropzone onFileAccepted={importFile}/>) }
           
+          <Button colorScheme='red' mr={3} type='submit'>
+                submit
+              </Button>
 
         </VStack>
     </form>

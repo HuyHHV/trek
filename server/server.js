@@ -2,17 +2,37 @@ const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 const { authMiddleware } = require('./utils/auth');
+const cors = require("cors");
+
+
+
 
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
 
 const PORT = process.env.PORT || 3001;
+
 const app = express();
+app.use(cors());
 const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: authMiddleware,
 });
+
+
+require("dotenv").config()
+
+mongoose
+  .connect(
+      process.env.MONGODB_CONNECTION_STRING,
+          {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+          }
+  )
+  .then(() => console.log("MongoDB has been connected"))
+  .catch((err) => console.log(err));
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());

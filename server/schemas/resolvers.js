@@ -23,7 +23,7 @@ const resolvers = {
       return Location.find();
     },
     
-    locations: async (locationID) => {
+    location: async (locationID) => {
       return Location.findOne({ _id: locationID });
     }
   },
@@ -55,7 +55,7 @@ const resolvers = {
     // Add location
     addLocation: async (parent, { name, street, suburb, URL }) => {
       const location = await User.create({ name, street, suburb, URL  });
-      return { location };
+      return { token, location };
     },
     // Set up mutation so a logged in user can only remove their profile and no one else's
     removeUser: async (parent, args, context) => {

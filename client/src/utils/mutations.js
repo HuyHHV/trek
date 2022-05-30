@@ -32,9 +32,6 @@ export const ADD_LOCATION = gql`
       location {
         _id
         name
-        street
-        suburb
-        URL
       }
     }
   }`
