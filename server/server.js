@@ -4,9 +4,6 @@ const path = require('path');
 const { authMiddleware } = require('./utils/auth');
 const cors = require("cors");
 
-
-
-
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
 
@@ -21,18 +18,7 @@ const server = new ApolloServer({
 });
 
 
-require("dotenv").config()
 
-mongoose
-  .connect(
-      process.env.MONGODB_CONNECTION_STRING,
-          {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-          }
-  )
-  .then(() => console.log("MongoDB has been connected"))
-  .catch((err) => console.log(err));
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
