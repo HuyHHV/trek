@@ -2,13 +2,13 @@ const { Schema, model } = require('mongoose');
 
 const locationSchema = new Schema (
     {
-        locationName: {
+        name: {
             type: String,
             required: [true, "can't be blank"],
         },
         geolocation: [{type:Number}],
         
-        photoUrl: {
+        URL: {
             type: String,
             required: 'URL can\'t be empty',
             match: [ /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/, 'is valid'],

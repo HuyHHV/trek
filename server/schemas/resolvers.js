@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User } = require('../models');
+const { User , Location} = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -18,6 +18,14 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+
+    locations: async () => {
+      return Location.find();
+    },
+    
+    locations: async (locationID) => {
+      return Location.findOne({ _id: locationID });
+    }
   },
 
   Mutation: {
@@ -44,42 +52,18 @@ const resolvers = {
       return { token, user };
     },
 
-    // Add a third argument to the resolver to access data in our `context`
-    // addLocation: async (parent, { userID, location }, context) => {
-    //   // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
-    //   if (context.user) {
-    //     return Profile.findOneAndUpdate(
-    //       { _id: userID },
-    //       {
-    //         $addToSet: { skills: skill },
-    //       },
-    //       {
-    //         new: true,
-    //         runValidators: true,
-    //       }
-    //     );
-    //   }
-    //   // If user attempts to execute this mutation and isn't logged in, throw an error
-    //   throw new AuthenticationError('You need to be logged in!');
-    // },
+    // Add location
+    addLocation: async (parent, { name, street, suburb, URL }) => {
+      const location = await User.create({ name, street, suburb, URL  });
+      return { location };
+    },
     // Set up mutation so a logged in user can only remove their profile and no one else's
     removeUser: async (parent, args, context) => {
       if (context.user) {
         return User.findOneAndDelete({ _id: context.user._id });
       }
       throw new AuthenticationError('You need to be logged in!');
-    },
-    // Make it so a logged in user can only remove a skill from their own profile
-    // removeSkill: async (parent, { skill }, context) => {
-    //   if (context.user) {
-    //     return Profile.findOneAndUpdate(
-    //       { _id: context.user._id },
-    //       { $pull: { skills: skill } },
-    //       { new: true }
-    //     );
-    //   }
-    //   throw new AuthenticationError('You need to be logged in!');
-    // },
+    }
   },
 };
 

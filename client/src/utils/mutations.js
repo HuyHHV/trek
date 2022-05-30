@@ -24,3 +24,17 @@ export const LOGIN_USER = gql`
     }
   }
 `;
+
+export const ADD_LOCATION = gql`
+  mutation addLocation($name: String!, $street:String!,$suburb:String!, $URL: String!) {
+    addLocation(name: $name, street: $street, suburb: $suburb, URL:$URL) {
+      token
+      location {
+        _id
+        name
+        street
+        suburb
+        URL
+      }
+    }
+  }`

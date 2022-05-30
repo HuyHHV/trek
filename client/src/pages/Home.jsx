@@ -3,8 +3,18 @@ import {
   Divider,
   Wrap,
   Container,
+  Button,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton
 } from '@chakra-ui/react';
 import Card from '../components/homeCards/Card';
+import ImgUploader from '../components/imgUploader/ImgUploader';
 
 const mockCardData = [
     {
@@ -28,8 +38,35 @@ const mockCardData = [
   ]
 
 function Home() {
+  const {isOpen,onOpen,onClose} = useDisclosure();
   return (
     <Container maxW={'7xl'} p="12">
+      <Button
+        onClick={onOpen}
+        type='submit'
+        bg={'orange.600'}
+        color={'white'}
+        _hover={{
+          bg: 'orange.500',
+        }}>
+        Upload
+      </Button>
+      
+      <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalCloseButton />
+            <ModalBody py={20}>
+              <ImgUploader />
+            </ModalBody>
+            <ModalFooter>
+              <Button colorScheme='orange' mr={3} onClick={onClose}>
+                Close
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+
       <Divider marginTop="2" />
       <Wrap spacing="30px" marginTop="5">
              <Card cards={mockCardData} />
