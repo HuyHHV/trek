@@ -49,8 +49,8 @@ export default function SignupCard() {
       });
 
       Auth.login(data.addUser.token);
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      console.error(error.networkError.result.errors);
     }
   };
 

@@ -4,43 +4,43 @@ import {
     Flex,
     Box,
   } from '@chakra-ui/react';
+import { useQuery } from '@apollo/client';
+import StatsCard from '../components/profile/StatsCard';
 
-  import StatsCard from '../components/profile/StatsCard';
+import { Navigate, useParams } from 'react-router-dom';
 
-  function Login() {
-    return (
-      <Container maxW={'7xl'}>
-        <Stack
-          align={'center'}
-          spacing={{ base: 8, md: 10 }}
-          py={{ base: 20, md: 28 }}
-          direction={{ base: 'column', md: 'row' }}>
-          <Flex
-            flex={1}
-            justify={'center'}
-            align={'center'}
-            position={'relative'}
-            w={'full'}>
-                <StatsCard/>
-          </Flex>
-          <Flex
-            flex={1}
-            justify={'center'}
-            align={'center'}
-            position={'relative'}
-            w={'full'}>
-            <Box
-              position={'relative'}
-              rounded={'2xl'}
-              boxShadow={'2xl'}
-              width={'full'}
-              overflow={'hidden'}>
-              The list go here
-            </Box>
-          </Flex>
-        </Stack>
-      </Container>
-    );
-  }
+import { QUERY_SINGLE_PROFILE, QUERY_ME } from '../utils/queries';
+
+import Auth from '../utils/auth';
+
+function Login() {
   
-  export default Login
+
+  return (
+    <Container maxW={'7xl'}>
+      <Stack
+        align={'center'}
+        spacing={{ base: 8, md: 10 }}
+        py={{ base: 20, md: 28 }}
+        direction={{ base: 'column', md: 'row' }}>
+        <Flex
+          flex={1}
+          justify={'center'}
+          align={'center'}
+          position={'relative'}
+          w={'full'}>
+              <StatsCard/>
+        </Flex>
+        <Flex
+          flex={1}
+          justify={'center'}
+          align={'center'}
+          position={'relative'}
+          w={'full'}>
+        </Flex>
+      </Stack>
+    </Container>
+  );
+}
+
+export default Login

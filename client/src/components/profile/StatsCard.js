@@ -11,7 +11,26 @@ import {
   HStack,
 } from '@chakra-ui/react';
 
+import { useQuery } from '@apollo/client';
+
+import { useParams } from 'react-router-dom';
+
+import { QUERY_SINGLE_PROFILE, QUERY_ME } from '../../utils/queries';
+
+
 export default function StatsCard() {
+  const { userId } = useParams();
+
+  const { loading, data } = useQuery(
+    userId ? QUERY_SINGLE_PROFILE : QUERY_ME,
+    {
+      variables: { userId: userId },
+    }
+  );
+
+  // Check if data is returning from the `QUERY_ME` query, then the `QUERY_SINGLE_PROFILE` query
+  const profile = data?.me || data?.user || {};
+
   return (
       <Box
         w={'75%'}
@@ -43,7 +62,7 @@ export default function StatsCard() {
         <Box p={6}>
           <Stack spacing={0} align={'center'} mb={5}>
             <Heading fontSize={'2xl'} fontWeight={500} fontFamily={'body'}>
-              John Doe
+              {profile.username}
             </Heading>
           </Stack>
 

@@ -17,15 +17,15 @@ import imgurAPI from '../../utils/imurAPI';
 function ImgUploader({ onFileAccepted }) {
     // on drop image
     const [dropState, setDropState] = useState(false);
-    const [file, setFile] = useState();
-    const [uploadImg, setImg] = useState();
+    const [files, setFile] = useState([]);
+    // const [uploadImg, setImg] = useState([]);
     const importFile = (img) => {
       console.log(img);
-      setImg(img);
-      Object.assign(img, {
+      // setImg([img]);
+      const imgs = [img];
+      setFile(imgs.map(img => Object.assign(img, {
         url: URL.createObjectURL(img)
-      });
-      setFile(img);
+      })));
       setDropState(true);
     };
     const [formState, setFormState] = useState({
@@ -49,10 +49,11 @@ function ImgUploader({ onFileAccepted }) {
       // submit form
       const handleFormSubmit = async (event) => {
         event.preventDefault();
-        const URL = await imgurAPI(file);
+        const URL = await imgurAPI(files[0]);
         console.log(URL)
         setFormState({
-          URL: URL
+          ...formState,
+          [URL]: URL
         });     
         console.log(formState);
         
@@ -62,8 +63,8 @@ function ImgUploader({ onFileAccepted }) {
           });
 
     
-        } catch (e) {
-          console.error(e);
+        } catch (error) {
+          console.error(error.networkError.result.errors);
         }
       };
 
@@ -99,7 +100,7 @@ function ImgUploader({ onFileAccepted }) {
               />
           </FormControl>
           {dropState ? 
-          (<Image src={file.url}/>) 
+          (<Image src={files[0].url}/>) 
           :(<Dropzone onFileAccepted={importFile}/>) }
           
           <Button colorScheme='red' mr={3} type='submit'>

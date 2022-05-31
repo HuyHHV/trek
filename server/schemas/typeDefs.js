@@ -22,9 +22,14 @@ const typeDefs = gql`
     user: User
   }
 
+  type locationResponse {
+    success: Boolean,
+    location: Location
+  }
+
   type Query {
     users: [User]!
-    user(userID: ID!): User
+    user(userId: ID!): User
     # Because we have the context functionality in place to check a JWT and decode its data, we can use a query that will always find and return the logged in user's data
     me: User
     locations: [Location]!
@@ -35,7 +40,7 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     removeUser: User
-    addLocation(name:String!, street:String!, suburb:String!, URL:String!): Auth
+    addLocation(name:String!, street:String!, suburb:String!, URL:String!): locationResponse
   }
 `;
 

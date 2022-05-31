@@ -8,8 +8,8 @@ const resolvers = {
       return User.find();
     },
 
-    user: async (parent, { userID }) => {
-      return User.findOne({ _id: userID });
+    user: async (parent, { userId }) => {
+      return User.findOne({ _id: userId });
     },
     // By adding context to our query, we can retrieve the logged in user without specifically searching for them
     me: async (parent, args, context) => {
@@ -19,12 +19,19 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    locations: async () => {
-      return Location.find();
+    locations: async (parent, args, context) => {
+      if (context.user) {
+        return Location.find();
+      }
+      throw new AuthenticationError('You need to be logged in!');
+      
     },
     
-    location: async (locationID) => {
-      return Location.findOne({ _id: locationID });
+    location: async (parent, {locationID},context) => {
+      if (context.user) {
+        return Location.findOne({ _id: locationID });
+      }
+      throw new AuthenticationError('You need to be logged in!');
     }
   },
 
@@ -53,9 +60,17 @@ const resolvers = {
     },
 
     // Add location
-    addLocation: async (parent, { name, street, suburb, URL }) => {
-      const location = await User.create({ name, street, suburb, URL  });
-      return { token, location };
+    addLocation: async (parent, { name, street, suburb, URL },context) => {
+      if (context.user) {
+        const location = await Location.create({ name, street, suburb, URL  });
+        const result = {
+          success:true,
+          location:location
+        }
+      return { result };
+      }
+      throw new AuthenticationError('You need to be logged in!');
+      
     },
     // Set up mutation so a logged in user can only remove their profile and no one else's
     removeUser: async (parent, args, context) => {
