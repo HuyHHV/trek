@@ -61,7 +61,10 @@ function Card(props) {
                 Description
           </Heading>
           <Text as="p" fontSize="md" marginTop="2">
-            {card.description}
+            Street: {card.street}
+          </Text>
+          <Text as="p" fontSize="md" marginTop="2">
+            Suburb: {card.suburb}
           </Text>
           {/* <BlogAuthor
             name="John Doe"
