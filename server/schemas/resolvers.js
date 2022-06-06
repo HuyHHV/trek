@@ -27,9 +27,9 @@ const resolvers = {
       
     },
     
-    location: async (parent, {locationID},context) => {
+    location: async (parent, {locationId},context) => {
       if (context.user) {
-        return Location.findOne({ _id: locationID });
+        return Location.findOne({ _id: locationId });
       }
       throw new AuthenticationError('You need to be logged in!');
     }
@@ -60,9 +60,9 @@ const resolvers = {
     },
 
     // Add location
-    addLocation: async (parent, { name, street, suburb, URL },context) => {
+    addLocation: async (parent, { name, street, suburb, src },context) => {
       if (context.user) {
-        const location = await Location.create({ name, street, suburb, URL  });
+        const location = await Location.create({ name, street, suburb, src  });
         const result = {
           success:true,
           location:location
@@ -72,6 +72,15 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
       
     },
+    removeLocation: async (parent, {locationId},context) => {
+      if (context.user) {
+        return Location.findOneAndDelete({ _id: location._id });
+      }
+      throw new AuthenticationError('You need to be logged in!');
+      
+    },
+
+
     // Set up mutation so a logged in user can only remove their profile and no one else's
     removeUser: async (parent, args, context) => {
       if (context.user) {

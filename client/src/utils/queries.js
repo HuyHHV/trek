@@ -7,6 +7,7 @@ export const QUERY_LOCATIONS = gql`
       name
       street
       suburb
+      src
     }
   }
 `;

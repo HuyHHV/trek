@@ -10,8 +10,7 @@ export default async function imurAPI(img) {
                     body: img
                 });
         const jsondata = await data.json();
-        const URL = jsondata.data.link ;  
-        console.log(URL);
+        const URL = jsondata.data.link ; 
         return URL
     }
     catch(error) {

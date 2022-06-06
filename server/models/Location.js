@@ -8,10 +8,10 @@ const locationSchema = new Schema (
         },
         geolocation: [{type:Number}],
         
-        URL: {
+        src: {
             type: String,
             required: 'URL can\'t be empty',
-            match: [ /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/, 'is valid'],
+            match: [ /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/, 'is valid'],
             unique: true
         },
         street: {

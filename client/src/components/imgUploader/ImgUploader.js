@@ -15,25 +15,26 @@ import { ADD_LOCATION } from '../../utils/mutations';
 import imgurAPI from '../../utils/imurAPI';
 
 function ImgUploader({ onFileAccepted }) {
-    // on drop image
+    const [formState, setFormState] = useState({
+      name: '',
+      street: '',
+      suburb:'',
+      src: ''
+    });
     const [dropState, setDropState] = useState(false);
     const [files, setFile] = useState([]);
+    // on drop image
     // const [uploadImg, setImg] = useState([]);
     const importFile = (img) => {
       console.log(img);
       // setImg([img]);
       const imgs = [img];
       setFile(imgs.map(img => Object.assign(img, {
-        url: URL.createObjectURL(img)
+        src: URL.createObjectURL(img)
       })));
       setDropState(true);
     };
-    const [formState, setFormState] = useState({
-        name: '',
-        street: '',
-        suburb:'',
-        URL: ''
-      });
+    
       const [addLocation, { error, data }] = useMutation(ADD_LOCATION);
     
       // update state based on form input changes
@@ -45,26 +46,23 @@ function ImgUploader({ onFileAccepted }) {
           [name]: value,
         });
       };
-    
+      
+
       // submit form
       const handleFormSubmit = async (event) => {
         event.preventDefault();
-        const URL = await imgurAPI(files[0]);
-        console.log(URL)
-        setFormState({
-          ...formState,
-          [URL]: URL
-        });     
-        console.log(formState);
-        
-        try {
-          const { data } = await addLocation({
-            variables: { ...formState },
-          });
+        // Upload the photo to Imgur API, with return result as an URL
+        const returnedURL = await imgurAPI(files[0]);
+        console.log(returnedURL);
 
-    
-        } catch (error) {
-          console.error(error.networkError.result.errors);
+        // fetching photo information to database using mutation
+        try {  
+          const newphotoData = { variables: { ...formState, src:returnedURL }};
+          console.log(newphotoData)
+          const { data } = await addLocation(newphotoData);
+        } 
+        catch (e) {
+          console.error(e.networkError.result.errors);
         }
       };
 
@@ -100,7 +98,7 @@ function ImgUploader({ onFileAccepted }) {
               />
           </FormControl>
           {dropState ? 
-          (<Image src={files[0].url}/>) 
+          (<Image src={files[0].src}/>) 
           :(<Dropzone onFileAccepted={importFile}/>) }
           
           <Button colorScheme='red' mr={3} type='submit'>

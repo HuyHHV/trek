@@ -53,7 +53,7 @@ export default function Nav() {
               spacing={4}
               display={{  md: 'flex' }}>
               {navlinks.map((navlink) => (
-                <NavLink link= {navlink.link} icon = {navlink.icon} />
+                <NavLink link= {navlink.link} icon = {navlink.icon} key = {navlink.link} />
               ))}
             </HStack> 
 
@@ -86,16 +86,15 @@ export default function Nav() {
                   </Center>
                   <br />
                   <MenuDivider />
-                  <MenuItem> 
-                    <Button onClick={toggleColorMode}>
+                  <MenuItem onClick={toggleColorMode}> 
                     {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-                    </Button>
+                    
                   </MenuItem>
             
-                  <MenuItem>
-                    <Button onClick={logout}>
+                  <MenuItem onClick={logout}>
+                    
                       Logout
-                    </Button>
+                    
                   </MenuItem>
                 </MenuList>
               </Menu>
