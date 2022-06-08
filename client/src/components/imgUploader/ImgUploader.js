@@ -35,7 +35,7 @@ function ImgUploader({ onFileAccepted }) {
       setDropState(true);
     };
     
-      const [addLocation, { error, data }] = useMutation(ADD_LOCATION);
+    const [addLocation, { error, data }] = useMutation(ADD_LOCATION);
     
       // update state based on form input changes
       const handleChange = (event) => {

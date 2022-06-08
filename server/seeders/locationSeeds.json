@@ -1,0 +1,26 @@
+[
+    {
+      "src" : "https://cdn.rundlemall.com/resized/images/Things-To-Do/47419/Malls-Balls_2407995d0ccda6fed38a12babfb09ef4_342145d4c633f7d42ec87a27ee1d2157.jpg",
+      "name" : "The 'Mall's Balls",
+      "street": "Rundle Mall",
+      "suburb": "Adelaide'",
+      "tags": ["artwork"],
+      "geolocation": "-34.922762,138.603279"
+    },
+    {
+        "src" : "https://d31atr86jnqrq2.cloudfront.net/heritage-places/_1200x799_crop_center-center_82_line/halifax-street-73-79.jpg?mtime=20200311163006&focal=none&tmtime=20211008160238",
+        "name" : "Chimney Stack",
+        "street": "Halifax",
+        "suburb": "Adelaide",
+        "tags": ["heritage ","monument"],
+        "geolocation": "-34.9332634,138.6030095"
+      },
+     {
+      "src" : "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/09/e5/cf/cape-jaffa-lighthousecelebrati.jpg?w=1200&h=-1&s=1",
+      "name" : "Cape Jaffa Lighthouse",
+      "street": "Marine Parade",
+      "suburb": "Kingstone SE",
+      "tags": ["monument","building"],
+      "geolocation": "-36.8358612,139.8458274"
+    }
+  ]

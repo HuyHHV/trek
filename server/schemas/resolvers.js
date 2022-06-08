@@ -21,7 +21,12 @@ const resolvers = {
 
     locations: async (parent, args, context) => {
       if (context.user) {
-        return Location.find();
+        try {
+          const locationData = await Location.find();
+        return locationData
+        }
+        catch(e) {console.log(e)}
+        
       }
       throw new AuthenticationError('You need to be logged in!');
       
@@ -74,12 +79,32 @@ const resolvers = {
     },
     removeLocation: async (parent, {locationId},context) => {
       if (context.user) {
-        return Location.findOneAndDelete({ _id: location._id });
+        return Location.findOneAndDelete({ _id: locationId});
       }
       throw new AuthenticationError('You need to be logged in!');
       
     },
 
+    addWantToGoList: async (parent, {userId,locationId},context) => {
+      if (context.user) {
+        try {
+          const data = User.findOneAndUpdate(
+            { _id: userId },
+            {
+              $addToSet: { want_to_go: locationId },
+            },
+            {
+              new: true,
+              runValidators: true,
+            }
+            );
+            return data
+        }
+        catch (error) {console.log(error)}
+      }
+      throw new AuthenticationError('You need to be logged in!');
+      
+    },
 
     // Set up mutation so a logged in user can only remove their profile and no one else's
     removeUser: async (parent, args, context) => {

@@ -35,3 +35,13 @@ export const ADD_LOCATION = gql`
       }
     }
   }`
+
+export const ADD_TO_LIST = gql`
+  mutation addWantToGoList($userId: ID!, $locationId: ID!) {
+    addWantToGoList(userId: $userId, locationId: $locationId) {
+        _id
+        username
+        want_to_go
+    }
+  }
+`;

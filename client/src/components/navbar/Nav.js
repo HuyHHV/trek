@@ -60,7 +60,7 @@ export default function Nav() {
           <Flex alignItems={'center'}>
             <Stack direction={'row'} spacing={7}>
              
-              <Menu>
+              <Menu closeOnSelect={false}>
                 <MenuButton
                   as={Button}
                   rounded={'full'}

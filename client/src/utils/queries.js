@@ -8,6 +8,7 @@ export const QUERY_LOCATIONS = gql`
       street
       suburb
       src
+      tags
     }
   }
 `;

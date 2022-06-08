@@ -6,7 +6,7 @@ const locationSchema = new Schema (
             type: String,
             required: [true, "can't be blank"],
         },
-        geolocation: [{type:Number}],
+        geolocation: {type:String},
         
         src: {
             type: String,
@@ -21,7 +21,8 @@ const locationSchema = new Schema (
         suburb: {
             type: String,
             require: [true]
-        }
+        },
+        tags: [String]
 }
 );
 

@@ -7,11 +7,6 @@ import {
 import { useQuery } from '@apollo/client';
 import StatsCard from '../components/profile/StatsCard';
 
-import { Navigate, useParams } from 'react-router-dom';
-
-import { QUERY_SINGLE_PROFILE, QUERY_ME } from '../utils/queries';
-
-import Auth from '../utils/auth';
 
 function Login() {
   

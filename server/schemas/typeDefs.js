@@ -12,9 +12,10 @@ const typeDefs = gql`
   type Location {
     _id: ID!
     name: String!
-    street: String!
-    suburb: String!
+    street: String
+    suburb: String
     src: String!
+    tags: [String!]!
   }
 
   type Auth {
@@ -42,6 +43,7 @@ const typeDefs = gql`
     removeUser: User
     removeLocation: Location
     addLocation(name:String!, street:String!, suburb:String!, src:String!): addLocationResponse
+    addWantToGoList(userId: ID!, locationId: ID!): User
   }
 `;
 

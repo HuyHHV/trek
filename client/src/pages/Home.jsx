@@ -1,4 +1,5 @@
 import React from 'react';
+import { useQuery } from '@apollo/client';
 import {
   Divider,
   Wrap,
@@ -14,7 +15,8 @@ import {
 } from '@chakra-ui/react';
 import Card from '../components/homeCards/Card';
 import ImgUploader from '../components/imgUploader/ImgUploader';
-
+import {ADD_TO_LIST} from '../utils/mutations';
+import {QUERY_LOCATIONS} from '../utils/queries'
 const mockCardData = [
     {
       imgSrc : 'https://cdn.rundlemall.com/resized/images/Things-To-Do/47419/Malls-Balls_2407995d0ccda6fed38a12babfb09ef4_342145d4c633f7d42ec87a27ee1d2157.jpg',
@@ -41,8 +43,11 @@ const mockCardData = [
 
 function Home() {
   const {isOpen,onOpen,onClose} = useDisclosure();
+  const { loading, data } = useQuery(QUERY_LOCATIONS);
+  const locations = data?.locations || [];
+  console.log(locations)
   return (
-    <Container maxW={'7xl'} p="12">
+    <Container maxW={'7xl'} p="6" h={"100vh"}>
       <Button
         onClick={onOpen}
         type='submit'
@@ -54,6 +59,11 @@ function Home() {
         Upload
       </Button>
       
+      <Divider marginTop="2" />
+      <Wrap spacing="30px" marginTop="5" h={"full"}>
+             <Card cards={locations} />
+      </Wrap>
+
       <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
@@ -69,11 +79,8 @@ function Home() {
           </ModalContent>
         </Modal>
 
-      <Divider marginTop="2" />
-      <Wrap spacing="30px" marginTop="5">
-             <Card cards={mockCardData} />
-      </Wrap>
     </Container>
+    
   );
 };
 
