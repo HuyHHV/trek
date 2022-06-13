@@ -5,6 +5,7 @@ const typeDefs = gql`
     _id: ID!
     username: String!
     email: String!
+    level: Int!
     password: String!
     discovered: [ID]
     want_to_go: [ID]
@@ -35,6 +36,7 @@ const typeDefs = gql`
     me: User
     locations: [Location]
     location(locationId:ID!): Location
+    want_to_go(locationId:[ID!]): [Location]
   }
 
   type Mutation {

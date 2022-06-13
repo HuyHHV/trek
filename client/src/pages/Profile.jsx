@@ -2,14 +2,28 @@ import {
     Container,
     Stack,
     Flex,
-    Box,
   } from '@chakra-ui/react';
-import { useQuery } from '@apollo/client';
+
 import StatsCard from '../components/profile/StatsCard';
 
+import { useQuery } from '@apollo/client';
+
+import { useParams } from 'react-router-dom';
+
+import { QUERY_SINGLE_PROFILE, QUERY_ME, QUERY_WANT_TO_GO } from '../utils/queries';
+import List from '../components/profile/List';
 
 function Login() {
-  
+  const { userId } = useParams();
+  const {  data } = useQuery(
+    userId ? QUERY_SINGLE_PROFILE : QUERY_ME,
+    {
+      variables: { userId: userId },
+    }
+  );
+
+  // Check if data is returning from the `QUERY_ME` query, then the `QUERY_SINGLE_PROFILE` query
+  const profile = data?.me || data?.user || {};
 
   return (
     <Container maxW={'7xl'}>
@@ -24,7 +38,7 @@ function Login() {
           align={'center'}
           position={'relative'}
           w={'full'}>
-              <StatsCard/>
+              <StatsCard profile={profile}/>
         </Flex>
         <Flex
           flex={1}
@@ -32,6 +46,7 @@ function Login() {
           align={'center'}
           position={'relative'}
           w={'full'}>
+            <List locationId = {profile.want_to_go}/>
         </Flex>
       </Stack>
     </Container>

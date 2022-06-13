@@ -11,26 +11,11 @@ import {
   HStack,
 } from '@chakra-ui/react';
 
-import { useQuery } from '@apollo/client';
 
-import { useParams } from 'react-router-dom';
-
-import { QUERY_SINGLE_PROFILE, QUERY_ME } from '../../utils/queries';
-
-
-export default function StatsCard() {
-  const { userId } = useParams();
-
-  const { loading, data } = useQuery(
-    userId ? QUERY_SINGLE_PROFILE : QUERY_ME,
-    {
-      variables: { userId: userId },
-    }
-  );
-
-  // Check if data is returning from the `QUERY_ME` query, then the `QUERY_SINGLE_PROFILE` query
-  const profile = data?.me || data?.user || {};
-
+export default function StatsCard(props) {
+  const currentLv= props.profile.level;
+  console.log(props.profile)
+  const nextLv = currentLv + 1;
   return (
       <Box
         w={'75%'}
@@ -62,7 +47,7 @@ export default function StatsCard() {
         <Box p={6}>
           <Stack spacing={0} align={'center'} mb={5}>
             <Heading fontSize={'2xl'} fontWeight={500} fontFamily={'body'}>
-              {profile.username}
+              {props.profile.username}
             </Heading>
           </Stack>
 
@@ -75,9 +60,9 @@ export default function StatsCard() {
             </Stack>
           </Stack>
           <HStack justify={'center'} spacing={2}>
-            <Text borderRadius={'full'} background ={'green.400'} color={'gray.200'} p={1}>lv 6</Text>
+            <Text borderRadius={'full'} background ={'green.400'} color={'gray.200'} p={1}> {currentLv}</Text>
             <Progress w={'70%'} colorScheme='green' size='sm' value={20} />
-            <Text borderRadius={'full'} background ={'green.400'} color={'gray.200'} p={1}>lv 7</Text>
+            <Text borderRadius={'full'} background ={'green.400'} color={'gray.200'} p={1}>{nextLv}</Text>
           </HStack>
           
           {/* <Button

@@ -34,10 +34,22 @@ const resolvers = {
     
     location: async (parent, {locationId},context) => {
       if (context.user) {
-        return Location.findOne({ _id: locationId });
+        try{
+          return Location.findOne({ _id: locationId });
+        }
+        catch(e){console.log(e)}
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    want_to_go: async (parent, {locationId}, context) => {
+      if (context.user) {
+        try{return Location.find({ '_id': { $in: locationId } });}
+        catch(e){console.log(e)}
       }
       throw new AuthenticationError('You need to be logged in!');
     }
+
   },
 
   Mutation: {

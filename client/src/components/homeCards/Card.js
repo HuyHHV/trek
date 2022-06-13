@@ -32,7 +32,7 @@ function Card(props) {
 
   // Check if data is returning from the `QUERY_ME` query, then the `QUERY_SINGLE_PROFILE` query
   const user = data?.me || data?.user || {};
-  const [addWantToGoList, { error, listData }] = useMutation(ADD_TO_LIST);
+  const [addWantToGoList, {listData,loadingList, error}] = useMutation(ADD_TO_LIST,{onCompleted(data) {console.log(data)}});
 
   const handleClick = async (event) => {
     const locationId = event.target.id
@@ -105,10 +105,6 @@ function Card(props) {
           <Text as="p" fontSize="md" marginTop="2">
             Suburb: {card.suburb}
           </Text>
-          {/* <BlogAuthor
-            name="John Doe"
-            date={new Date('2021-04-06T19:01:27Z')}
-          /> */}
         </Box>
       </WrapItem>
     ))}

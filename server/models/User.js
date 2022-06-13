@@ -5,7 +5,7 @@ const userSchema = new Schema({
     username: {
         type: String,
         required: [true, "can't be blank"],
-        match: [/^[a-zA-Z0-9]+$/, 'is invalid'],
+        match: [/^[a-zA-Z0-9]+$/, 'username cannot contain special characters'],
         unique: true,
         trim: true,
         },
@@ -25,7 +25,7 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true,
-        minlength: 5,
+        minlength: [5,'minimum length is 5'],
         },
 
     discovered: [
