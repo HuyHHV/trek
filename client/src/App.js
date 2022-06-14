@@ -17,6 +17,7 @@ import {
 import { setContext } from '@apollo/client/link/context';
 
 import Auth from './utils/auth';
+import Ranking from './pages/Ranking';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -49,6 +50,7 @@ function App() {
       <Routes>
         <Route path="/" element = {Auth.loggedIn() ? (<Home/>) : (<LoginPage/>)}/>
         <Route path="/profile" element = {<Profile/>}/>
+        <Route path="/ranking" element = {<Ranking/>}/>
       </Routes>
     </ApolloProvider>
   );

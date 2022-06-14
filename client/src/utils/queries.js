@@ -38,6 +38,17 @@ export const QUERY_SINGLE_PROFILE = gql`
   }
 `;
 
+export const QUERY_ALL_USERS = gql`
+  query allUsers {
+    users {
+      _id
+      username
+      level
+    }
+  }
+`;
+
+
 export const QUERY_ME = gql`
   query me {
     me {
@@ -49,3 +60,4 @@ export const QUERY_ME = gql`
     }
   }
 `;
+

@@ -28,14 +28,13 @@ function Login() {
   return (
     <Container maxW={'7xl'}>
       <Stack
-        align={'center'}
+        align={'flex-start'}
         spacing={{ base: 8, md: 10 }}
         py={{ base: 20, md: 28 }}
         direction={{ base: 'column', md: 'row' }}>
         <Flex
           flex={1}
           justify={'center'}
-          align={'center'}
           position={'relative'}
           w={'full'}>
               <StatsCard profile={profile}/>
@@ -45,7 +44,8 @@ function Login() {
           justify={'center'}
           align={'center'}
           position={'relative'}
-          w={'full'}>
+          w={'full'}
+          >
             <List locationId = {profile.want_to_go}/>
         </Flex>
       </Stack>

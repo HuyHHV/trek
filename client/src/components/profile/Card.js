@@ -11,6 +11,10 @@ function Card(props) {
                 key={card._id} 
                 justify="space-between" 
                 w="full"
+                transition="0.3s ease-in-out"
+                _hover={{
+                transform: 'scale(1.05)',
+                }}
                 >
                 <Box w = "30%">
                     <Image

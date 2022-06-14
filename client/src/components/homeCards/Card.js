@@ -57,11 +57,12 @@ function Card(props) {
         p="2em"
         key={card._id}
         border='1px' 
-        borderColor='gray.400'
+        borderColor='gray.600'
         transition="0.3s ease-in-out"
         _hover={{
           transform: 'scale(1.05)',
-        }}
+        }
+      }
         >
         <Box w="100%">
           <Box position="relative">

@@ -15,7 +15,6 @@ import {
 } from '@chakra-ui/react';
 import Card from '../components/homeCards/Card';
 import ImgUploader from '../components/imgUploader/ImgUploader';
-import {ADD_TO_LIST} from '../utils/mutations';
 import {QUERY_LOCATIONS} from '../utils/queries'
 
 function Home() {
