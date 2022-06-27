@@ -16,6 +16,7 @@ const typeDefs = gql`
     street: String
     suburb: String
     src: String!
+    geolocation: String
     tags: [String!]!
   }
 
@@ -46,6 +47,8 @@ const typeDefs = gql`
     removeLocation: Location
     addLocation(name:String!, street:String!, suburb:String!, src:String!): addLocationResponse
     addWantToGoList(userId: ID!, locationId: ID!): User
+    addToDiscoveredList(userId: ID!, locationId: ID!): User
+    removeLocationInList(locationId:ID!): User
   }
 `;
 

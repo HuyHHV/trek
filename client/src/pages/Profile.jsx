@@ -13,18 +13,10 @@ import { useParams } from 'react-router-dom';
 import { QUERY_SINGLE_PROFILE, QUERY_ME, QUERY_WANT_TO_GO } from '../utils/queries';
 import List from '../components/profile/List';
 
-function Login() {
-  const { userId } = useParams();
-  const {  data } = useQuery(
-    userId ? QUERY_SINGLE_PROFILE : QUERY_ME,
-    {
-      variables: { userId: userId },
-    }
-  );
-
-  // Check if data is returning from the `QUERY_ME` query, then the `QUERY_SINGLE_PROFILE` query
-  const profile = data?.me || data?.user || {};
-
+function Profile() {
+  const {data,error} = useQuery(QUERY_ME);  
+  const userData = data?.me || [];
+  console.log(userData)
   return (
     <Container maxW={'7xl'}>
       <Stack
@@ -37,7 +29,7 @@ function Login() {
           justify={'center'}
           position={'relative'}
           w={'full'}>
-              <StatsCard profile={profile}/>
+              <StatsCard profile={userData}/>
         </Flex>
         <Flex
           flex={1}
@@ -46,11 +38,11 @@ function Login() {
           position={'relative'}
           w={'full'}
           >
-            <List locationId = {profile.want_to_go}/>
+            <List locationId = {userData.want_to_go}/>
         </Flex>
       </Stack>
     </Container>
   );
 }
 
-export default Login
+export default Profile

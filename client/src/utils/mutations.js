@@ -45,3 +45,25 @@ export const ADD_TO_LIST = gql`
     }
   }
 `;
+
+export const ADD_TO_DISCOVERED = gql`
+  mutation addToDiscoveredList($userId: ID!, $locationId: ID!) {
+    addToDiscoveredList(userId: $userId, locationId: $locationId) {
+        _id
+        username
+        want_to_go
+    }
+  }
+`;
+
+export const REMOVE_LOCATION_FROM_LIST = gql`
+  mutation removeLocationInList($locationId: ID!) {
+    removeLocationInList(locationId: $locationId) {
+      _id
+      username
+      level
+      discovered
+      want_to_go
+    }
+  }
+`;

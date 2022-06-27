@@ -105,9 +105,42 @@ const resolvers = {
       if (context.user) {
         try {
           const data = User.findOneAndUpdate(
-            { _id: userId },
+            { _id: context.user._id },
             {
               $addToSet: { want_to_go: locationId },
+            },
+            {
+              new: true,
+              runValidators: true,
+            }
+            );
+            return data
+        }
+        catch (error) {console.log(error)}
+      }
+      throw new AuthenticationError('You need to be logged in!');
+      
+    },
+
+    // remove a location from want-to-go list 
+    removeLocationInList: async (parent, { locationId }, context) => {
+      if (context.user) {
+        return User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { want_to_go: locationId } },
+          { new: true }
+        );
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    addToDiscoveredList: async (parent, {userId,locationId},context) => {
+      if (context.user) {
+        try {
+          const data = User.findOneAndUpdate(
+            { _id: context.user._id },
+            {
+              $addToSet: { discovered: locationId },
             },
             {
               new: true,

@@ -22,6 +22,7 @@ export const QUERY_WANT_TO_GO = gql`
       suburb
       src
       tags
+      geolocation
     }
   }
 `;

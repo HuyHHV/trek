@@ -14,7 +14,7 @@ import {
 
 export default function StatsCard(props) {
   const currentLv= props.profile.level;
-  console.log(props.profile)
+  // console.log(props.profile)
   const nextLv = currentLv + 1;
   return (
       <Box
@@ -60,9 +60,9 @@ export default function StatsCard(props) {
             </Stack>
           </Stack>
           <HStack justify={'center'} spacing={2}>
-            <Text borderRadius={'full'} background ={'green.400'} color={'gray.200'} p={1}> {currentLv}</Text>
-            <Progress w={'70%'} colorScheme='green' size='sm' value={20} />
-            <Text borderRadius={'full'} background ={'green.400'} color={'gray.200'} p={1}>{nextLv}</Text>
+            <Text borderRadius={'full'} background ={'orange.600'} color={'gray.200'} p={2}> {currentLv}</Text>
+            <Progress w={'70%'} colorScheme='orange' size='sm' value={20} />
+            <Text borderRadius={'full'} background ={'orange.600'} color={'gray.200'} p={2}>{nextLv}</Text>
           </HStack>
           
           {/* <Button

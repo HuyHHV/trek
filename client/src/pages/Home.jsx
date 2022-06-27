@@ -21,7 +21,6 @@ function Home() {
   const {isOpen,onOpen,onClose} = useDisclosure();
   const { loading, data } = useQuery(QUERY_LOCATIONS);
   const locations = data?.locations || [];
-  console.log(locations)
   return (
     <Container maxW={'7xl'} p="6" h={"100vh"}>
       <Button
