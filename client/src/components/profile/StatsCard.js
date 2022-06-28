@@ -13,9 +13,9 @@ import {
 
 
 export default function StatsCard(props) {
-  const currentLv= props.profile.level;
+  let currentLv= props.profile.level;
   // console.log(props.profile)
-  const nextLv = currentLv + 1;
+  let nextLv = currentLv++;
   return (
       <Box
         w={'75%'}

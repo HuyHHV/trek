@@ -32,7 +32,7 @@ function Card(prop) {
         },
     })
 
-    const [addToDiscoveredList] = useMutation(REMOVE_LOCATION_FROM_LIST)
+    const [addToDiscoveredList] = useMutation(ADD_TO_DISCOVERED)
 
     const removeCard = async(locationId) => {
         try {
@@ -57,7 +57,7 @@ function Card(prop) {
             const result=getDistanceFromLatLonInKm(locationLat,locationLon,currentLat,currentLon)
             console.log(result);
             // return true if user is within 100m radius from the location otherwise false
-            if (result<0.1) return true;
+            if (result<0.2) return true;
             return false
         }
         
@@ -79,23 +79,22 @@ function Card(prop) {
         const checkinResult = await checkin();
 
         if (checkinResult) {
-            removeCard(card._id)
+            await removeCard(card._id);
             try {
-                const { data } = await addToDiscoveredList({
-                    variables: { locationId:card._id },
+               const { data } = await addToDiscoveredList({
+                    variables: { locationId:card._id},
                 });
+                console.log("done")
                 } catch (err) {
-                console.error(err);
+                console.error(err?.networkError.result.errors);
                 }
         }
 
         };
         
     return (
-      <>
-            <VStack key={prop.index}>
+            <VStack>
                 <HStack 
-                    key={card.name}
                     justify="space-between" 
                     w="full"
                     transition="0.3s ease-in-out"
@@ -125,11 +124,10 @@ function Card(prop) {
                         </VStack>
                     </Box>
                 </HStack> 
-                <HStack key={"button"}>
+                <HStack >
                   <Button
                       onClick={handleClick}  
                       id={card._id}
-                      data-geo={card.geolocation}
                       bg={'orange.400'}
                       color={'white'}
                       _hover={{
@@ -152,7 +150,7 @@ function Card(prop) {
                 </HStack>
                 <Divider color="gray.300" marginTop="4" />      
             </VStack>
-      </>
+      
   )
 }
 

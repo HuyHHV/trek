@@ -45,7 +45,7 @@ function Card(props) {
     try{
       const {locationData} = await addWantToGoList(addedLocation)
     }
-    catch(error) {console.error(error.networkError.result.errors);}
+    catch(error) {console.error(error);}
   };
   return (
     <>

@@ -23,22 +23,26 @@ function List(props) {
   return (
     <Box
         w= '75%'
-        maxH={'50%'}
         bg={useColorModeValue('white', 'gray.800')}
         boxShadow={'2xl'}
         rounded={'md'}
         overflow={'hidden'}
         >
-        <Box p={6} >
+        <Box>
           <Stack spacing={0} align={'center'} mb={2}>
             <Heading fontSize={'2xl'} fontWeight={500} fontFamily={'body'}>
               Want-to-go
             </Heading>
           </Stack>
           <Divider mb={2}/>
-          <VStack  spacing={2}>
+          <VStack  
+            spacing={2} 
+            maxH="20em"
+            overflow="hidden" 
+            overflowY="scroll"
+            >
             {cards.map((card,index) => (
-                <Card card={card} index={index}/>
+                <Card card={card} key={index.toString()}/>
             )
             )}
           </VStack>

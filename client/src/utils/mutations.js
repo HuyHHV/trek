@@ -47,8 +47,8 @@ export const ADD_TO_LIST = gql`
 `;
 
 export const ADD_TO_DISCOVERED = gql`
-  mutation addToDiscoveredList($userId: ID!, $locationId: ID!) {
-    addToDiscoveredList(userId: $userId, locationId: $locationId) {
+  mutation addToDiscoveredList($locationId: ID!) {
+    addToDiscoveredList(locationId: $locationId) {
         _id
         username
         want_to_go

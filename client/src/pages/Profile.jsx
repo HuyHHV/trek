@@ -22,7 +22,7 @@ function Profile() {
       <Stack
         align={'flex-start'}
         spacing={{ base: 8, md: 10 }}
-        py={{ base: 20, md: 28 }}
+        py={{ base: 20, md: 20 }}
         direction={{ base: 'column', md: 'row' }}>
         <Flex
           flex={1}

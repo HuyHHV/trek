@@ -22,7 +22,7 @@ function Home() {
   const { loading, data } = useQuery(QUERY_LOCATIONS);
   const locations = data?.locations || [];
   return (
-    <Container maxW={'7xl'} p="6" h={"100vh"}>
+    <Container maxW={'7xl'} p="6" >
       <Button
         onClick={onOpen}
         type='submit'
