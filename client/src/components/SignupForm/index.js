@@ -1,2 +1,2 @@
-import SignupCard from "./SignUpForm";
-export default SignupCard;
+import SignupForm from "./SignupForm";
+export default SignupForm;
