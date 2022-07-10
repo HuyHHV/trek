@@ -10,6 +10,9 @@ import {
     Button,
     Heading,
     useColorModeValue,
+    VStack,
+    Alert,
+    AlertIcon,
   } from '@chakra-ui/react';
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
@@ -41,32 +44,33 @@ export default function SignupCard() {
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
-
     try {
       const { data } = await addUser({
         variables: { ...formState },
       });
-
-      Auth.login(data.addUser.token);
+      Auth.login(data.addUser.token)
     } catch (error) {
-      console.error(error.networkError.result.errors);
+      console.error(error);
     }
   };
 
 
   return (
     <Flex
-      minH={'100vh'}
-      align={'center'}
+      
       justify={'center'}
       >
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
-        <Stack align={'center'}>
+        <VStack align={'center'}>
           <Heading fontSize={'4xl'} textAlign={'center'}>
             Sign up
           </Heading>
-        </Stack>
+          {error && 
+            <Alert status='error'>
+                <AlertIcon/>
+                {error.message}
+            </Alert>}
+        </VStack>
         <Box
           rounded={'lg'}
           bg={useColorModeValue('white', 'gray.700')}

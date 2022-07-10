@@ -58,22 +58,26 @@ const resolvers = {
 
   Mutation: {
     addUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
-      const token = signToken(user);
-
-      return { token, user };
+      // check whether email is already existed
+    const count = await User.countDocuments({email: email}); 
+    if (count == 0) {
+      throw new AuthenticationError('email has been used');
+    }
+    const user = await User.create({ username, email, password });
+    const token = signToken(user);
+    return { token, user };
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
       if (!user) {
-        throw new AuthenticationError('wrong email or password');
+        throw new AuthenticationError('incorrect email or password');
       }
 
       const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
-        throw new AuthenticationError('wrong email or password');
+        throw new AuthenticationError('incorrect email or password');
       }
 
       const token = signToken(user);
@@ -81,9 +85,9 @@ const resolvers = {
     },
 
     // Add location
-    addLocation: async (parent, { name, street, suburb, src },context) => {
+    addLocation: async (parent, { name, street, suburb, src, tags },context) => {
       if (context.user) {
-        const location = await Location.create({ name, street, suburb, src  });
+        const location = await Location.create({ name, street, suburb, src ,tags });
         const result = {
           success:true,
           location:location

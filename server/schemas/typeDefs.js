@@ -17,7 +17,7 @@ const typeDefs = gql`
     suburb: String
     src: String!
     geolocation: String
-    tags: [String!]!
+    tags: [String]
   }
 
   type Auth {
@@ -45,7 +45,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     removeUser: User
     removeLocation: Location
-    addLocation(name:String!, street:String!, suburb:String!, src:String!): addLocationResponse
+    addLocation(name:String!, street:String!, suburb:String!, src:String!, tags:[String]): addLocationResponse
     addWantToGoList(userId: ID!, locationId: ID!): User
     addToDiscoveredList(locationId: ID!): User
     removeLocationInList(locationId:ID!): User

@@ -9,6 +9,9 @@ import {
     Button,
     Heading,
     useColorModeValue,
+    VStack,
+    Alert,
+    AlertIcon
   } from '@chakra-ui/react';
   
 import { useMutation } from '@apollo/client';
@@ -58,9 +61,14 @@ export default function LoginForm() {
       justify={'center'}
       >
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
-        <Stack align={'center'}>
+        <VStack align={'center'}>
           <Heading fontSize={'4xl'}>Sign in to your account</Heading>
-        </Stack>
+          {error && 
+            <Alert status='error'>
+                <AlertIcon/>
+                {error.message}
+            </Alert>}
+        </VStack>
         <Box
           rounded={'lg'}
           bg={useColorModeValue('white', 'gray.700')}

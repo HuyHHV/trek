@@ -51,18 +51,16 @@ function Card(props) {
     <>
     {props.cards.map(card => (
         <WrapItem 
+        key={card._id}
+        display='flex'
         width={{ base: '100%', sm: '45%', md: '45%', lg: '30%' }} 
+        height= '80%'
         boxShadow={'2xl'}
         rounded={'md'}
         p="2em"
-        key={card._id}
+        m="4em"
         border='1px' 
         borderColor='gray.600'
-        transition="0.3s ease-in-out"
-        _hover={{
-          transform: 'scale(1.05)',
-        }
-      }
         >
         <Box w="100%">
           <Box position="relative">

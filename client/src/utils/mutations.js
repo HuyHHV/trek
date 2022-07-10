@@ -26,8 +26,8 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_LOCATION = gql`
-  mutation addLocation($name: String!, $street:String!,$suburb:String!, $src: String!) {
-    addLocation(name: $name, street: $street, suburb: $suburb, src:$src) {
+  mutation addLocation($name: String!, $street:String!,$suburb:String!, $src: String!, $tags:[String]) {
+    addLocation(name: $name, street: $street, suburb: $suburb, src:$src, tags:$tags) {
       success
       location {
         _id
