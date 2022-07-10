@@ -17,8 +17,8 @@ import {
     useDisclosure
   } from '@chakra-ui/react';
 
-  import LoginForm from './LoginForm';
-  import SignupForm from './SignUpForm';
+  import LoginForm from '../LoginForm';
+  import SignupForm from '../SignUpForm';
   
   export default function LoginOptions() {
     const signupModal = useDisclosure();
