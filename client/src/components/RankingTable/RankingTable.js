@@ -13,7 +13,7 @@ import {
   } from '@chakra-ui/react'
 
 import {useQuery} from '@apollo/client'
-import {QUERY_ALL_USERS} from '../utils/queries'
+import {QUERY_ALL_USERS} from '../../utils/queries'
 
 function RankingTable() {
     const {data,error} = useQuery(QUERY_ALL_USERS)

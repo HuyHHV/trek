@@ -20,7 +20,7 @@ import {
   import LoginForm from './LoginForm';
   import SignupForm from './SignUpForm';
   
-  export default function SimpleCard() {
+  export default function LoginOptions() {
     const signupModal = useDisclosure();
     const loginModal = useDisclosure()
     return (
