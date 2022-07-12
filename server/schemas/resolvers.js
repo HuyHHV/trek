@@ -60,7 +60,7 @@ const resolvers = {
     addUser: async (parent, { username, email, password }) => {
       // check whether email is already existed
     const count = await User.countDocuments({email: email}); 
-    if (count !== 0) {
+    if (count == 0) {
       throw new AuthenticationError('email has been used');
     }
     const user = await User.create({ username, email, password });
