@@ -1,2 +1,2 @@
-import SignupForm from "./SignupForm";
-export default SignupForm
+import SignUpForm from "./SignupForm.js";
+export default SignUpForm
